@@ -2,7 +2,7 @@
     "name": "taahirisaacs/elementor",
     "description": "",
     "keywords": ["wordpress", "plugin"],
-    "homepage": "https://taahirisaacs@github.com/taahirisaacs/elementor",
+    "homepage": "https://github.com/taahirisaacs/elementor",
     "type": "wordpress-plugin",
     "require": {
       "php": ">=7.1"
