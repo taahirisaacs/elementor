@@ -1,0 +1,10 @@
+{
+    "name": "taahirisaacs/elementor-pro",
+    "description": "",
+    "keywords": ["wordpress", "plugin"],
+    "homepage": "https://github.com/taahirisaacs/elementor-pro",
+    "type": "wordpress-plugin",
+    "require": {
+      "php": ">=7.1"
+    }
+}
