@@ -1,5 +1,157 @@
 # Elementor Pro - by Elementor.com
 
+#### 3.3.0 - 2021-06-08
+* New: Video Playlist widget - Add Engaging Video Content to Your Website ([#11859](https://github.com/elementor/elementor/issues/11859), [#7803](https://github.com/elementor/elementor/issues/7803))
+* New: Hotspot widget - Create Interactive Images With Contextually Relevant Information ([#7282](https://github.com/elementor/elementor/issues/7282), [#2768](https://github.com/elementor/elementor/issues/2768))
+* Tweak: Accessibility improvements for sub-menus in Nav Menu widget ([#13859](https://github.com/elementor/elementor/issues/13859), [#13810](https://github.com/elementor/elementor/issues/13810))
+* Tweak: MailChimp action after submit can now add new tags to existing subscribers in Forms widget ([#11111](https://github.com/elementor/elementor/issues/11111))
+* Tweak: Added `elementor_pro/forms/record/actions_before` to filter the record before it sent to Actions After Submit in Forms widget ([#14261](https://github.com/elementor/elementor/issues/14261))
+* Tweak: Yoast SEO breadcrumbs widget can be used in Elementor without the need of enabling them in Yoast setting
+* Tweak: Added future support for widgets CSS conditional loading ([#10329](https://github.com/elementor/elementor/issues/10329), [#14229](https://github.com/elementor/elementor/issues/14229))
+* Tweak: Added future support for Sticky JS library conditional loading
+* Tweak: Added future support for Import / Export experiment
+* Tweak: Preparations and fixes for Import Export Experiment in Pro version
+* Tweak: Added gradient button capabilities to Login widget buttons
+* Tweak: Added gradient button capabilities to Slides widget button
+* Tweak: Added gradient button capabilities to Price Table widget button
+* Tweak: Added gradient button capabilities to Flip Box widget button
+* Tweak: Added Code Highlight widget Developers Documentation
+* Tweak: Adjusted Submissions page for future updates
+* Tweak: Added `em` and `%` units for padding control in Carousel widgets
+* Tweak: Shorten currency name to currency symbol in PayPal button widget
+* Fix: Custom Fonts URLs should be replaced when replace URL is triggered ([#7376](https://github.com/elementor/elementor/issues/7376), [#10382](https://github.com/elementor/elementor/issues/10382))
+* Fix: The currency symbol size changed in the Price Table widget if enabling sale ([#13519](https://github.com/elementor/elementor/issues/13519))
+* Fix: Nav Menu widget is not loading Font Awesome submenu icons ([#9907](https://github.com/elementor/elementor/issues/9907))
+* Fix: Hamburger toggle is not working in Nav menu widget
+* Fix: Activation bug for IDN domains
+* Fix: Conditions modal responsive glitches in Custom Code
+* Fix: Duplicated strings in Custom Code module
+* Fix: Enable resize option for code input field in Custom Code
+* Fix: “Save & Close “button in Custom Code's Conditions modal was not visible on small screen sizes
+* Fix: Removing a column from a section in the navigator resulted in an empty section
+* Fix: Recommend option is cut If the layout is not "Standard" in the Facebook Button widget
+* Fix: Video item does not play without adding an image in Media Carousel widget
+* Fix: `search-plus` icon missing from panel in Media Carousel widget
+* Fix: UI hover state glitch in Media Carousel widget
+* Fix: PHP notice was thrown when trying to import a kit without overrideConditions parameter in Kit Import flow
+* Fix: Templates conditions not imported if there are no conflicts in Import Export Experiment
+* Fix: Non english values are not encoded properly on Submissions export
+* Fix: Theme Builder import is not working properly
+* Fix: UI glitch when no global widgets were found in Editor Panel
+* Deprecated: See all deprecations to this version in our [Developers Deprecations Post](https://developers.elementor.com/v3-3-planned-deprecations/)
+
+#### 3.2.2 - 2021-05-05
+* Tweak: Added support for Expert tier templates in Templates Library
+* Tweak: Updated compatibility tag to support Elementor v3.2.x
+* Tweak: Added compatibility for future Library improvements
+* Fix: Toolset image dynamic field is not working with Gallery widget
+
+#### 3.2.1 - 2021-03-21
+* Tweak: Added strings context in PayPal button and Price Table widgets
+* Tweak: Added support for future Import / Export Kit feature
+* Fix: Submissions with over than 191 characters weren't indexed properly
+
+#### 3.2.0 - 2021-03-14
+* New: PayPal Button widget - Collect PayPal payments directly from your site
+* Experiment: Submissions - Save all of your form submissions in one place ([#1686](https://github.com/elementor/elementor/issues/1686))
+* Tweak: Added Stay In Column option to Inner Section element ([#7956](https://github.com/elementor/elementor/issues/7956))
+* Tweak: Adjusted 'Max Height' control range in Table of Contents widget
+* Tweak: Changed descriptive text in Create Custom Code screen
+* Tweak: Added support for dynamic capabilities in Code Highlight widget
+* Tweak: Added support for future load on demand for `share-link` library
+* Tweak: Added support for future load on demand for `dialog` library in Popup
+* Tweak: Allow overwriting the assets URL when using a mirror domain
+* Fix: Animation was triggered multiple times when accessing the viewport in certain cases in Animated Headline widget ([#13951](https://github.com/elementor/elementor/issues/13951))
+* Fix: Location is not being updated after a Custom Code snippet is published ([#13971](https://github.com/elementor/elementor/issues/13971))
+* Fix: Custom Fonts CSS files were not updated after regenerating CSS files
+* Fix: Conditions modal is not responsive in Custom Code
+* Fix: Empty order buttons are displayed in Custom Fonts screen
+* Fix: Typo in 'Reply To' Email action after submit placeholder in Forms widget
+* Fix: Unnecessary Save Draft button in Custom Code
+* Fix: RTL glitches in Custom Code
+* Fix: Sanitized options in the editor to enforce better security policies
+* Deprecated: See all deprecations to this version in our ([Developers Deprecations Post](https://developers.elementor.com/v3-2-planned-deprecations/))
+
+#### 3.1.1 - 2021-02-23
+* Tweak: Adjusted 'Max Height' control range in Table of Contents widget
+* Fix: Popup event handler is undefined ([https://github.com/elementor/elementor/issues/11475](#11475), [https://github.com/elementor/elementor/issues/10690](#10690))
+* Fix: Conditions modal is not responsive in Custom Code
+* Fix: RTL glitches in Code Highlight widget
+* Fix: Minor UI glitches in Code Highlight widget
+* Fix: Users can't get Pro Developer Edition version updates
+
+#### 3.1.0 - 2021-02-13
+* New: Introducing Custom Code - Add custom code snippets to your site, including `head`, `body` start and `body` end
+* New: Meet Code Highlight widget - showcase any syntax with highlighted UI ([#5815](https://github.com/elementor/elementor/issues/5815))
+* Experiment: Improved Pro widgets performance by loading JS and Swiper assets conditionally in frontend ([#8572](https://github.com/elementor/elementor/issues/8572), [Developer Documentation](https://developers.elementor.com/experiment-optimized-asset-loading/))
+* Tweak: Added Compatibility Tag support in Elementor Pro ([Developer Documentation](https://developers.elementor.com/compatibility-tag/))
+* Tweak: Added Dynamic capabilities to Rotating Text animation in Animated Headline widget ([#4625](https://github.com/elementor/elementor/issues/4625), [#8569](https://github.com/elementor/elementor/issues/8569))
+* Tweak: Added an option to set Selected color for Typing effect in Animated Headline widget ([#5403](https://github.com/elementor/elementor/issues/5403), [#7826](https://github.com/elementor/elementor/issues/7826))
+* Tweak: Added animation Loop option for Animated Headline ([#9749](https://github.com/elementor/elementor/issues/9749), [#2457](https://github.com/elementor/elementor/issues/2457))
+* Tweak: Added timing options for Animated Headline widget ([#4392](https://github.com/elementor/elementor/issues/4392))
+* Tweak: Added dynamic capabilities for Testimonial Carousel widget ([#8569](https://github.com/elementor/elementor/issues/8569))
+* Tweak: Added dynamic capabilities for Price Table widget ([#4242](https://github.com/elementor/elementor/issues/4242), [#8569](https://github.com/elementor/elementor/issues/8569))
+* Tweak: Added Word Wrap control to Code Highlight widget ([#13577](https://github.com/elementor/elementor/issues/13577))
+* Tweak: Upgraded Font Awesome Pro library to v5.15.1
+* Tweak: Improved method of loading field mapping repeater in Form widget ([Developer Documentation](https://developers.elementor.com/how-to-add-a-repeater-control-to-elementor-add-on/))
+* Tweak: Added "Show on Browsers" Popup Advanced Rule
+* Tweak: Added real-time JS handling to prevent redundant renders in Slides widget and all Carousel widgets
+* Tweak: Import scroll utility from core and remove it from Pro
+* Tweak: Added alignment options for Post Excerpt widget ([#9757](https://github.com/elementor/elementor/issues/9757))
+* Tweak: Changed alignment control to work with selectors in Share Buttons
+* Tweak: Upgraded to Webpack 5, Grunt-Webpack 4 and TerserPlugin instead of UglifyJsPlugin
+* Fix: Steps Divider is not vertically aligned in Multi Step Form widget ([#12569](https://github.com/elementor/elementor/issues/12569))
+* Fix: Slides are playing in an infinite loop mode even when the option is disabled in Slides Widget ([#6726](https://github.com/elementor/elementor/issues/6726))
+* Fix: Redundant spacing is added to Share Buttons widget
+* Fix: Step buttons text is not updated without a page reload in Forms widget
+* Fix: Overflow issue in certain animations in Animated Headline widget
+* Fix: When dragging a new Testimonial Carousel there is a console error thrown
+* Fix: Step Buttons are cut in mobile view in Multi Step Form
+* Fix: Submit and Step buttons size differences when using Twenty Twenty theme
+* Fix: Duplicate button Text Color control in Slides widget
+* Fix: JS error is thrown when editing and saving global widgets
+* Fix: `get_version` API function may fail with Redis / DB cache
+* Fix: Multiple license check requests are created in certain cases
+* Deprecated: Deprecate methods prefixed with an underscore and replace them with unprefixed methods
+* Deprecated: See all deprecations to this version in our [Developers Deprecations Post](https://developers.elementor.com/v3-1-planned-deprecations/)
+
+#### 3.0.10 - 2021-01-20
+* Tweak: Added Editing Handles string translation compatibility with Elementor v3.1.0
+
+#### 3.0.9 - 2020-12-29
+* Tweak: Added compatibility to support Elementor 3.1.0
+* Fix: Wrong phrasing of Import template success message in Theme Builder
+* Fix: Border color glitch in Theme Builder
+
+#### 3.0.8 - 2020-11-26
+* Fix: Navigation arrows UI glitch in Media Carousel widget ([#13172](https://github.com/elementor/elementor/issues/13172))
+
+#### 3.0.7 - 2020-11-25
+* Fix: Console Error when dragging  Testimonials Carousel widget
+* Fix: Arrows of Testimonial and Reviews Carousel widgets navigate to the wrong direction in RTL websites
+* Fix: Removed the conditional loading of Webpack
+* Fix: Fatal error is thrown after deleting an associated custom taxonomy when Posts widget with Cards skin has a badge
+* Fix: Upload JSON files only when the user allowed to prevent security issues
+* Fix: Gallery not displayed in Theme Builder templates preview
+
+#### 3.0.6 - 2020-11-04
+* Tweak: Updated the embedded post in Facebook Embed widget
+* Fix: Minor UI glitches in Theme Builder's conditions screen footer
+* Fix: Template type changes into Single Page after conditions change in Theme Builder
+* Fix: Redundant Custom Caption option in Site Logo widget
+* Fix: Removed unused code in Drip integration
+* Fix: Removed Weibo and WeChat social networks due to website and links inactivity from Share Buttons widget
+* Fix: Removed redundant code from Portfolio and Post Navigation widgets
+
+#### 3.0.5 - 2020-09-23
+* Fix: If the default page layout is set to "Canvas" Headers and Footers cannot be edited
+* Fix: Product Image Dynamic Tag throws an error when no image is set
+* Fix: Missing Single document placeholder in Theme Builder
+* Fix: Document editing handles inherit the `font-family` from 3rd party source
+* Fix: Can't add linebreaks to Textarea input when used as Multi Step Form
+* Fix: Incorrect width in Facebook Page widget
+* Fix: Added compatibility to allow the use of 'get_create_url' in Theme Builder
+
 #### 3.0.4 - 2020-09-09
 * Fix: Autogenerated screenshots appear in WP Media Library modal ([#12304](https://github.com/elementor/elementor/issues/12304))
 * Fix: Make sure Elementor Posts widget Pagination doesn't interfere with 3rd party plugins ([#12126](https://github.com/elementor/elementor/issues/12126), [#12127](https://github.com/elementor/elementor/issues/12127))

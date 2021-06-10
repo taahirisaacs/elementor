@@ -31,7 +31,7 @@ class Price_List extends Base_Widget {
 		return [ 'pricing', 'list', 'product', 'image', 'menu' ];
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 		$this->start_controls_section(
 			'section_list',
 			[
@@ -580,5 +580,9 @@ class Price_List extends Base_Widget {
 			 <# } #>
 		</ul>
 		<?php
+	}
+
+	public function get_group_name() {
+		return 'pricing';
 	}
 }

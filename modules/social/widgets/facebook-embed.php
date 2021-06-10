@@ -31,7 +31,7 @@ class Facebook_Embed extends Base_Widget {
 		return [ 'facebook', 'social', 'embed', 'video', 'post', 'comment' ];
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 		$this->start_controls_section(
 			'section_content',
 			[
@@ -59,7 +59,7 @@ class Facebook_Embed extends Base_Widget {
 			'post_url',
 			[
 				'label' => __( 'URL', 'elementor-pro' ),
-				'default' => 'https://www.facebook.com/elemntor/posts/1823653464612271',
+				'default' => 'https://www.facebook.com/elemntor/posts/2624214124556197',
 				'dynamic' => [
 					'active' => true,
 				],
@@ -214,4 +214,8 @@ class Facebook_Embed extends Base_Widget {
 	}
 
 	public function render_plain_content() {}
+
+	public function get_group_name() {
+		return 'social';
+	}
 }

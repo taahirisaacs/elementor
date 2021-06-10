@@ -27,6 +27,10 @@ class Product_Archive extends Archive {
 		return __( 'Products Archive', 'elementor-pro' );
 	}
 
+	public static function get_plural_title() {
+		return __( 'Products Archives', 'elementor-pro' );
+	}
+
 	protected static function get_site_editor_icon() {
 		return 'eicon-products';
 	}
@@ -145,8 +149,8 @@ class Product_Archive extends Archive {
 		return $config;
 	}
 
-	protected function _register_controls() {
-		parent::_register_controls();
+	protected function register_controls() {
+		parent::register_controls();
 
 		$this->update_control(
 			'preview_type',

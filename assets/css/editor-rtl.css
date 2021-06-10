@@ -1,4 +1,4 @@
-/*! elementor-pro - v3.0.4 - 09-09-2020 */
+/*! elementor-pro - v3.3.0 - 06-06-2021 */
 #elementor-panel-get-pro-elements {
   display: none; }
 
@@ -76,18 +76,16 @@
 #elementor-global-widget-locked-unlink {
   border-top: 1px solid #e6e9ec; }
 
-#elementor-global-templates {
-  padding: 0 5px; }
-  #elementor-global-templates .elementor-element {
-    position: relative; }
-    #elementor-global-templates .elementor-element:before {
-      position: absolute;
-      font-family: eicons;
-      content: '\e91f';
-      top: 5px;
-      left: 5px;
-      color: #fcb92c;
-      font-size: 10px; }
+#elementor-global-templates .elementor-element {
+  position: relative; }
+  #elementor-global-templates .elementor-element:before {
+    position: absolute;
+    font-family: eicons;
+    content: '\e91f';
+    top: 5px;
+    left: 5px;
+    color: #fcb92c;
+    font-size: 10px; }
 
 #elementor-global-widget-loading {
   position: absolute;
@@ -129,7 +127,8 @@
   .elementor-facebook-widget.fb_iframe_widget span {
     width: 100% !important; }
   .elementor-facebook-widget.fb_iframe_widget iframe {
-    position: relative; }
+    position: relative;
+    width: 100% !important; }
 
 .elementor-facebook-widget.fb-like {
   height: 1px; }
@@ -488,6 +487,12 @@
 
 #elementor-popup__timing-controls-group--logged_in .elementor-control-logged_in_roles .elementor-control-input-wrapper {
   width: 195px; }
+
+#elementor-popup__timing-controls-group--browsers .elementor-control-browsers_browsers .elementor-control-input-wrapper {
+  width: 100px; }
+
+#elementor-popup__timing-controls-group--browsers .elementor-control-browsers_browsers_options .elementor-control-input-wrapper {
+  width: 200px; }
 
 #elementor-popup-settings-introduction {
   position: absolute;

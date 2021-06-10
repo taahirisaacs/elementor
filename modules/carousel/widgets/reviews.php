@@ -30,8 +30,8 @@ class Reviews extends Base {
 		return [ 'reviews', 'social', 'rating', 'testimonial', 'carousel' ];
 	}
 
-	protected function _register_controls() {
-		parent::_register_controls();
+	protected function register_controls() {
+		parent::register_controls();
 
 		$this->update_control(
 			'slide_padding',
@@ -806,5 +806,9 @@ class Reviews extends Base {
 
 	protected function render() {
 		$this->print_slider();
+	}
+
+	public function get_group_name() {
+		return 'carousel';
 	}
 }

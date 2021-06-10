@@ -37,7 +37,7 @@ class Post_Navigation extends Base {
 		return [ 'post-navigation' ];
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 		$this->start_controls_section(
 			'section_post_navigation_content',
 			[
@@ -532,7 +532,7 @@ class Post_Navigation extends Base {
 			}
 		}
 		?>
-		<div class="elementor-post-navigation elementor-grid">
+		<div class="elementor-post-navigation">
 			<div class="elementor-post-navigation__prev elementor-post-navigation__link">
 				<?php previous_post_link( '%link', $prev_arrow . '<span class="elementor-post-navigation__link__prev">' . $prev_label . $prev_title . '</span>', $in_same_term, '', $taxonomy ); ?>
 			</div>

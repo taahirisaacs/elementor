@@ -236,14 +236,7 @@ class Module extends Module_Base {
 						$doc_type = Plugin::elementor()->documents->get_document_type( $post_type );
 						$doc_class = new $doc_type();
 
-						// New: Core >=2.7.0
-						$is_base_page = class_exists( '\Elementor\Core\DocumentTypes\PageBase' ) && $doc_class instanceof \Elementor\Core\DocumentTypes\PageBase;
-
-						// Old: Core < 2.7.0. TODO: Remove on 2.7.0.
-						if ( ! $is_base_page ) {
-							$doc_name = $doc_class->get_name();
-							$is_base_page = in_array( $doc_name, [ 'post', 'page', 'wp-post', 'wp-page' ] );
-						}
+						$is_base_page = $doc_class instanceof \Elementor\Core\DocumentTypes\PageBase;
 
 						if ( $is_base_page ) {
 							$post_type_object = get_post_type_object( $post_type );
@@ -312,13 +305,6 @@ class Module extends Module_Base {
 	}
 
 	public function add_finder_items( array $categories ) {
-		$categories['general']['items']['theme-builder'] = [
-			'title' => __( 'Theme Builder', 'elementor-pro' ),
-			'icon' => 'library-save',
-			'url' => Plugin::elementor()->app->get_settings( 'menu_url' ),
-			'keywords' => [ 'template', 'header', 'footer', 'single', 'archive', 'search', '404', 'library' ],
-		];
-
 		$categories['create']['items']['theme-template'] = [
 			'title' => __( 'Add New Theme Template', 'elementor-pro' ),
 			'icon' => 'plus-circle-o',
@@ -377,6 +363,31 @@ class Module extends Module_Base {
 		return add_query_arg( 'tabs_group', self::ADMIN_LIBRARY_TAB_GROUP, $base_url );
 	}
 
+	private function add_conflicts_to_import_result( array $result ) {
+		$manifest_data = $result['manifest'];
+
+		if ( empty( $manifest_data['templates'] ) ) {
+			return $result;
+		}
+
+		foreach ( $manifest_data['templates'] as $template_id => $template ) {
+			if ( empty( $template['conditions'] ) ) {
+				continue;
+			}
+
+			foreach ( $template['conditions'] as $condition ) {
+				$condition = rtrim( implode( '/', $condition ), '/' );
+				$conflicts = $this->get_conditions_manager()->get_conditions_conflicts_by_location( $condition, $template['location'] );
+
+				if ( $conflicts ) {
+					$result['conflicts'][ $template_id ] = $conflicts;
+				}
+			}
+		}
+
+		return $result;
+	}
+
 	public function __construct() {
 		parent::__construct();
 
@@ -404,6 +415,9 @@ class Module extends Module_Base {
 		add_action( 'elementor/template-library/create_new_dialog_fields', [ $this, 'print_post_type_field' ] );
 		add_filter( 'elementor/template-library/create_new_dialog_types', [ $this, 'create_new_dialog_types' ] );
 		add_filter( 'views_edit-' . Source_Local::CPT, [ $this, 'print_new_theme_builder_promotion' ], 9 );
+		add_filter( 'elementor/import/stage_1/result', function( array $result ) {
+			return $this->add_conflicts_to_import_result( $result );
+		} );
 
 		// Common
 		add_filter( 'elementor/finder/categories', [ $this, 'add_finder_items' ] );

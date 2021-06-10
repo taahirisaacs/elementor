@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-class Error_404 extends Single {
+class Error_404 extends Single_Base {
 
 	protected static function get_site_editor_type() {
 		return 'error-404';
@@ -16,6 +16,10 @@ class Error_404 extends Single {
 	}
 
 	public static function get_title() {
+		return __( 'Error 404', 'elementor-pro' );
+	}
+
+	public static function get_plural_title() {
 		return __( 'Error 404', 'elementor-pro' );
 	}
 

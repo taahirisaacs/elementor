@@ -3,6 +3,7 @@ namespace ElementorPro\Modules\ThemeBuilder\Documents;
 
 use Elementor\Controls_Manager;
 use ElementorPro\Modules\ThemeBuilder\Module;
+use ElementorPro\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -18,6 +19,10 @@ class Section extends Theme_Section_Document {
 		return __( 'Section', 'elementor-pro' );
 	}
 
+	public static function get_plural_title() {
+		return __( 'Sections', 'elementor-pro' );
+	}
+
 	public static function get_properties() {
 		$properties = parent::get_properties();
 
@@ -27,8 +32,8 @@ class Section extends Theme_Section_Document {
 		return $properties;
 	}
 
-	protected function _register_controls() {
-		parent::_register_controls();
+	protected function register_controls() {
+		parent::register_controls();
 
 		Module::instance()->get_locations_manager()->register_locations();
 
@@ -80,6 +85,14 @@ class Section extends Theme_Section_Document {
 		);
 
 		$this->end_controls_section();
+	}
+
+	public function get_export_data() {
+		$data = parent::get_export_data();
+
+		$data['location'] = $this->get_location();
+
+		return $data;
 	}
 
 	public function save_settings( $settings ) {

@@ -30,7 +30,7 @@ class Flip_Box extends Base_Widget {
 		return 'eicon-flip-box';
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		$this->start_controls_section(
 			'section_side_a_content',
@@ -1255,13 +1255,17 @@ class Flip_Box extends Base_Widget {
 			]
 		);
 
-		$this->add_control(
-			'button_background_color',
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
 			[
-				'label' => __( 'Background Color', 'elementor-pro' ),
-				'type' => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .elementor-flip-box__button' => 'background-color: {{VALUE}};',
+				'name' => 'button_background',
+				'types' => [ 'classic', 'gradient' ],
+				'exclude' => [ 'image' ],
+				'selector' => '{{WRAPPER}} .elementor-flip-box__button',
+				'fields_options' => [
+					'background' => [
+						'default' => 'classic',
+					],
 				],
 			]
 		);
@@ -1300,13 +1304,17 @@ class Flip_Box extends Base_Widget {
 			]
 		);
 
-		$this->add_control(
-			'button_hover_background_color',
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
 			[
-				'label' => __( 'Background Color', 'elementor-pro' ),
-				'type' => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .elementor-flip-box__button:hover' => 'background-color: {{VALUE}};',
+				'name' => 'button_hover_background',
+				'types' => [ 'classic', 'gradient' ],
+				'exclude' => [ 'image' ],
+				'selector' => '{{WRAPPER}} .elementor-flip-box__button:hover',
+				'fields_options' => [
+					'background' => [
+						'default' => 'classic',
+					],
 				],
 			]
 		);

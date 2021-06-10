@@ -4,7 +4,6 @@ namespace ElementorPro\Modules\Forms\Actions;
 use Elementor\Controls_Manager;
 use ElementorPro\Modules\Forms\Classes\Form_Record;
 use ElementorPro\Modules\Forms\Classes\Integration_Base;
-use ElementorPro\Modules\Forms\Controls\Fields_Map;
 use ElementorPro\Modules\Forms\Classes\Convertkit_Handler;
 use ElementorPro\Core\Utils;
 use Elementor\Settings;
@@ -101,27 +100,7 @@ class Convertkit extends Integration_Base {
 			]
 		);
 
-		$widget->add_control(
-			'convertkit_fields_map',
-			[
-				'label' => __( 'Field Mapping', 'elementor-pro' ),
-				'type' => Fields_Map::CONTROL_TYPE,
-				'separator' => 'before',
-				'fields' => [
-					[
-						'name' => 'remote_id',
-						'type' => Controls_Manager::HIDDEN,
-					],
-					[
-						'name' => 'local_id',
-						'type' => Controls_Manager::SELECT,
-					],
-				],
-				'condition' => [
-					'convertkit_form!' => '',
-				],
-			]
-		);
+		$this->register_fields_map_control( $widget );
 
 		$widget->add_control(
 			'convertkit_tags',
@@ -157,9 +136,7 @@ class Convertkit extends Integration_Base {
 		$subscriber = $this->create_subscriber_object( $record );
 
 		if ( ! $subscriber ) {
-			$ajax_handler->add_admin_error_message( __( 'ConvertKit Integration requires an email field', 'elementor-pro' ) );
-
-			return;
+			throw new \Exception( __( 'Integration requires an email field', 'elementor-pro' ) );
 		}
 
 		if ( 'default' === $form_settings['convertkit_api_key_source'] ) {
@@ -172,12 +149,8 @@ class Convertkit extends Integration_Base {
 			$subscriber['tags'] = $form_settings['convertkit_tags'];
 		}
 
-		try {
-			$handler = new ConvertKit_Handler( $api_key );
-			$handler->create_subscriber( $form_settings['convertkit_form'], $subscriber );
-		} catch ( \Exception $exception ) {
-			$ajax_handler->add_admin_error_message( 'ConvertKit ' . $exception->getMessage() );
-		}
+		$handler = new ConvertKit_Handler( $api_key );
+		$handler->create_subscriber( $form_settings['convertkit_form'], $subscriber );
 	}
 
 	/**
@@ -288,5 +261,13 @@ class Convertkit extends Integration_Base {
 			add_action( 'elementor/admin/after_create_settings/' . Settings::PAGE_ID, [ $this, 'register_admin_fields' ], 15 );
 		}
 		add_action( 'wp_ajax_' . self::OPTION_NAME_API_KEY . '_validate', [ $this, 'ajax_validate_api_token' ] );
+	}
+
+	protected function get_fields_map_control_options() {
+		return [
+			'condition' => [
+				'convertkit_form!' => '',
+			],
+		];
 	}
 }

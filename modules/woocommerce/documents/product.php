@@ -28,6 +28,10 @@ class Product extends Single_Base {
 		return __( 'Single Product', 'elementor-pro' );
 	}
 
+	public static function get_plural_title() {
+		return __( 'Single Products', 'elementor-pro' );
+	}
+
 	protected static function get_site_editor_icon() {
 		return 'eicon-single-product';
 	}
@@ -154,8 +158,8 @@ class Product extends Single_Base {
 		return $categories;
 	}
 
-	protected function _register_controls() {
-		parent::_register_controls();
+	protected function register_controls() {
+		parent::register_controls();
 
 		$this->update_control(
 			'preview_type',

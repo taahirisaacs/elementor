@@ -60,8 +60,8 @@ class Media_Carousel extends Base {
 		$this->print_slider( $settings );
 	}
 
-	protected function _register_controls() {
-		parent::_register_controls();
+	protected function register_controls() {
+		parent::register_controls();
 
 		$this->start_controls_section(
 			'section_lightbox_style',
@@ -241,7 +241,7 @@ class Media_Carousel extends Base {
 
 	protected function get_image_link_to( $slide ) {
 		if ( ! empty( $slide['video']['url'] ) ) {
-			return $slide['image']['url'];
+			return $slide['image']['url'] ? $slide['image']['url'] : '#';
 		}
 
 		if ( ! $slide['image_link_to_type'] ) {
@@ -484,7 +484,7 @@ class Media_Carousel extends Base {
 				'default' => 'search-plus',
 				'options' => [
 					'search-plus' => [
-						'icon' => 'eicon-search-plus',
+						'icon' => 'eicon-search-bold',
 					],
 					'plus-circle' => [
 						'icon' => 'eicon-plus-circle',
@@ -755,5 +755,9 @@ class Media_Carousel extends Base {
 				],
 			]
 		);
+	}
+
+	public function get_group_name() {
+		return 'carousel';
 	}
 }

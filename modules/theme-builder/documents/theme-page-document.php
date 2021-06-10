@@ -21,8 +21,16 @@ abstract class Theme_Page_Document extends Theme_Document {
 		return 'body.elementor-page-' . $this->get_main_id();
 	}
 
-	protected function _register_controls() {
-		parent::_register_controls();
+	public static function get_properties() {
+		$properties = parent::get_properties();
+
+		$properties['support_wp_page_templates'] = true;
+
+		return $properties;
+	}
+
+	protected function register_controls() {
+		parent::register_controls();
 
 		$this->start_injection( [
 			'of' => 'post_status',

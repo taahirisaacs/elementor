@@ -3,6 +3,8 @@ namespace ElementorPro\Core\Upgrade;
 
 use Elementor\Core\Base\Document;
 use Elementor\Core\Upgrade\Updater;
+use Elementor\Icons_Manager;
+use Elementor\Core\Upgrade\Upgrades as Core_Upgrades;
 use ElementorPro\Plugin;
 use Elementor\Modules\History\Revisions_Manager;
 
@@ -612,6 +614,65 @@ class Upgrades {
 		return self::_update_widget_settings( 'form', $updater, $changes );
 	}
 
+	public static function _v_3_1_0_media_carousel( $updater ) {
+		$changes = [
+			[
+				'callback' => [ 'ElementorPro\Core\Upgrade\Upgrades', '_convert_progress_to_progressbar' ],
+				'control_ids' => [],
+			],
+		];
+
+		return self::_update_widget_settings( 'media-carousel', $updater, $changes );
+	}
+
+	public static function _v_3_1_0_reviews( $updater ) {
+		$changes = [
+			[
+				'callback' => [ 'ElementorPro\Core\Upgrade\Upgrades', '_convert_progress_to_progressbar' ],
+				'control_ids' => [],
+			],
+		];
+
+		return self::_update_widget_settings( 'reviews', $updater, $changes );
+	}
+
+	public static function _v_3_1_0_testimonial_carousel( $updater ) {
+		$changes = [
+			[
+				'callback' => [ 'ElementorPro\Core\Upgrade\Upgrades', '_convert_progress_to_progressbar' ],
+				'control_ids' => [],
+			],
+		];
+
+		return self::_update_widget_settings( 'testimonial-carousel', $updater, $changes );
+	}
+
+	public static function _v_3_1_0_slides( $updater ) {
+		$changes = [
+			[
+				'callback' => [ 'ElementorPro\Core\Upgrade\Upgrades', '_migrate_slides_button_color_settings' ],
+				'control_ids' => [],
+			],
+		];
+
+		return self::_update_widget_settings( 'slides', $updater, $changes );
+	}
+
+	public static function _v_3_3_0_nav_menu_icon( $updater ) {
+		$changes = [
+			[
+				'callback' => [ 'ElementorPro\Core\Upgrade\Upgrades', '_migrate_indicator_control_to_submenu_icon' ],
+				'control_ids' => [],
+			],
+		];
+
+		return self::_update_widget_settings( 'nav-menu', $updater, $changes );
+	}
+
+	public static function _v_3_3_0_recalc_usage_data( $updater ) {
+		return Core_Upgrades::recalc_usage_data( $updater );
+	}
+
 	/**
 	 * $changes is an array of arrays in the following format:
 	 * [
@@ -798,6 +859,74 @@ class Upgrades {
 	}
 
 	/**
+	 * Migrates the value saved for the 'indicator' SELECT control in the Nav Menu Widget to the new replacement
+	 * 'submenu_icon' ICONS control.
+	 *
+	 * @param $element
+	 * @param $args
+	 *
+	 * @return mixed;
+	 */
+	public static function _migrate_indicator_control_to_submenu_icon( $element, $args ) {
+		$widget_id = $args['widget_id'];
+
+		// If the current element is not a Nav Menu widget, go to the next one.
+		if ( empty( $element['widgetType'] ) || $widget_id !== $element['widgetType'] ) {
+			return $element;
+		}
+
+		// If this Nav Menu widget's 'indicator' control value is the default one (there is no value in the DB),
+		// there is nothing to migrate, since the default icon is identical in the new control. Go to the next element.
+		if ( ! isset( $element['settings']['indicator'] ) ) {
+			return $element;
+		}
+
+		$new_value = '';
+		$new_library = 'fa-solid';
+
+		switch ( $element['settings']['indicator'] ) {
+			case 'none':
+				$new_library = '';
+				break;
+			case 'classic':
+				$new_value = 'fa-caret-down';
+				break;
+			case 'chevron':
+				$new_value = 'fa-chevron-down';
+				break;
+			case 'angle':
+				$new_value = 'fa-angle-down';
+				break;
+			case 'plus':
+				$new_value = 'e-plus-icon';
+				$new_library = '';
+				break;
+		}
+
+		// This is done in order to make sure that the menu will not look any different for users who upgrade.
+		// The 'None' option should be completely empty.
+		if ( $new_value ) {
+			if ( Icons_Manager::is_migration_allowed() ) {
+				// If the site has been migrated to FA5, add the new FA Solid class.
+				$new_value = 'fas ' . $new_value;
+			} else {
+				// If the site has not been migrated, add the old generic 'fa' class.
+				$new_value = 'fa ' . $new_value;
+			}
+		}
+
+		// Set the migrated value for the new control.
+		$element['settings']['submenu_icon'] = [
+			'value' => $new_value,
+			'library' => $new_library,
+		];
+
+		$args['do_update'] = true;
+
+		return $element;
+	}
+
+	/**
 	 * @param $element
 	 * @param $args
 	 *
@@ -841,6 +970,66 @@ class Upgrades {
 		if ( empty( $diff ) ) { // Nothing was changed
 			$element['settings'][ $new_id . '_backup' ] = $element['settings'][ $new_id ];
 			$element['settings'][ $new_id ] = $term_taxonomy_ids;
+			$args['do_update'] = true;
+		}
+
+		return $element;
+	}
+
+	/**
+	 * Convert 'progress' to 'progressbar'
+	 *
+	 * Before Elementor 2.2.0, the progress bar option key was 'progress'. In Elementor 2.2.0,
+	 * it was changed to 'progressbar'. This upgrade script migrated the DB data for old websites using 'progress'.
+	 *
+	 * @param $element
+	 * @param $args
+	 * @return mixed
+	 */
+	public static function _convert_progress_to_progressbar( $element, $args ) {
+		$widget_id = $args['widget_id'];
+
+		if ( empty( $element['widgetType'] ) || $widget_id !== $element['widgetType'] ) {
+			return $element;
+		}
+
+		if ( 'progress' === $element['settings']['pagination'] ) {
+			$element['settings']['pagination'] = 'progressbar';
+			$args['do_update'] = true;
+		}
+
+		return $element;
+	}
+
+	/**
+	 * Migrate Slides Button Color Settings
+	 *
+	 * Move Slides Widget's 'button_color' settings to 'button_text_color' and 'button_border_color' as necessary,
+	 * to allow for removing the redundant control.
+	 *
+	 * @param $element
+	 * @param $args
+	 * @return mixed
+	 */
+	public static function _migrate_slides_button_color_settings( $element, $args ) {
+		if ( empty( $element['widgetType'] ) || $args['widget_id'] !== $element['widgetType'] ) {
+			return $element;
+		}
+
+		// If the element doesn't use the 'button_color' control, no need to do anything.
+		if ( ! isset( $element['settings']['button_color'] ) ) {
+			return $element;
+		}
+
+		// Check if button_text_color is set. If it is not set, transfer the value from button_color to button_text_color.
+		if ( ! isset( $element['settings']['button_text_color'] ) ) {
+			$element['settings']['button_text_color'] = $element['settings']['button_color'];
+			$args['do_update'] = true;
+		}
+
+		// Check if button_border_color is set. If it is not set, transfer the value from button_color to button_border_color.
+		if ( ! isset( $element['settings']['button_border_color'] ) ) {
+			$element['settings']['button_border_color'] = $element['settings']['button_color'];
 			$args['do_update'] = true;
 		}
 

@@ -7,6 +7,7 @@ use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
 use Elementor\Utils;
+use ElementorPro\Core\Utils as Pro_Utils;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -37,7 +38,7 @@ class Author_Box extends Base {
 		return [ 'author', 'user', 'profile', 'biography', 'testimonial', 'avatar' ];
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 		$this->start_controls_section(
 			'section_author_info',
 			[
@@ -708,7 +709,7 @@ class Author_Box extends Base {
 		$link_tag = 'div';
 		$link_url = '';
 		$link_target = '';
-		$author_name_tag = $settings['author_name_tag'];
+		$author_name_tag = Pro_Utils::validate_html_tag( $settings['author_name_tag'] );
 
 		$custom_src = ( 'custom' === $settings['source'] );
 
